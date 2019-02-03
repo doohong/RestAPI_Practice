@@ -1,5 +1,6 @@
 package com.doohong.restapi.event;
 
+import com.doohong.restapi.common.TestDescription;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,7 @@ public class EventControllerTests {
     ObjectMapper objectMapper;
 
     @Test
+    @TestDescription("정상적으로 이벤트를 생성하는 테스트")
     public void createEvent() throws Exception { //필요이상 입력값 필요값 외의 값  무시
         EventDto event = EventDto.builder()
                 .name("Spring")
@@ -54,6 +56,7 @@ public class EventControllerTests {
                 .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()));
     }
     @Test
+    @TestDescription("입력 받을 수 없는 값을 사용한 경우에 에러가 발생하는 테스트")
     public void createEvent_Bad_request() throws Exception { //필요 이상 입력값 입력시 400오류
         Event event = Event.builder()
                 .id(100)
@@ -81,6 +84,7 @@ public class EventControllerTests {
         ;
     }
     @Test
+    @TestDescription("입력 값이 비어있는 경우에 에러가 발생하는 테스트")
     public void createEvent_Bad_request_Empty_Input() throws Exception { //필요 이상 입력값 입력시 400오류
         EventDto eventDto = EventDto.builder().build();
 
@@ -90,6 +94,7 @@ public class EventControllerTests {
                     .andExpect(status().isBadRequest());
     }
     @Test
+    @TestDescription("입력 값이 잘못된 경우에 에러가 발생하는 테스트")
     public void createEvent_Bad_request_Wrong_Input() throws Exception { //필요 이상 입력값 입력시 400오류
         EventDto eventDto = EventDto.builder().name("Spring")
                 .description("REST API Development with Spring")
