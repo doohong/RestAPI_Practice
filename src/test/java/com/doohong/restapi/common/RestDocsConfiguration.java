@@ -1,5 +1,8 @@
 package com.doohong.restapi.common;
 
+import lombok.extern.java.Log;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.RestDocsMockMvcConfigurationCustomizer;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +18,7 @@ public class RestDocsConfiguration {
         return new RestDocsMockMvcConfigurationCustomizer() {
             @Override
             public void customize(MockMvcRestDocumentationConfigurer configurer) {
+
                 configurer.operationPreprocessors().withRequestDefaults(prettyPrint())
                                                     .withResponseDefaults(prettyPrint());
             }
